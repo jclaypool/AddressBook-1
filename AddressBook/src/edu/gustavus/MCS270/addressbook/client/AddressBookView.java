@@ -3,13 +3,17 @@ package edu.gustavus.MCS270.addressbook.client;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+
+import edu.gustavus.MCS270.addressbook.shared.Contact;
 
 public class AddressBookView {
 	
@@ -101,6 +105,48 @@ public class AddressBookView {
 		content.add(btnRow);
 		searchPopup.setWidget(content);
 		searchPopup.center();
+	}
+	
+	private FormPanel makeAddContactForm(final Contact contact) {
+		final FormPanel contactFormPanel = new FormPanel();
+		VerticalPanel textFieldFormPanel = new VerticalPanel();
+		textFieldFormPanel.addStyleName("submitPostVertPanel");
+		contactFormPanel.add(textFieldFormPanel);
+		
+		// First Name Input 
+		HorizontalPanel fNameRow = new HorizontalPanel();
+		Label nameLabel = new Label("First");
+		final TextBox nameTextbox = new TextBox();
+		fNameRow.add(nameLabel);
+		fNameRow.add(nameTextbox);
+		postFormPanel.add(nameRow);
+				
+		// Title input
+		HorizontalPanel titleRow = new HorizontalPanel();
+		Label titleLabel = new Label("Title (e.g. car, bike, etc)");
+		final TextBox titleTextbox = new TextBox();
+		titleRow.add(titleLabel);
+		titleRow.add(titleTextbox);
+		postFormPanel.add(titleRow);
+				
+		// Description input
+		HorizontalPanel descrRow = new HorizontalPanel();
+		Label descrLabel = new Label("Item Short description");
+		final TextArea descrText = new TextArea();
+		descrText.setCharacterWidth(40);
+		descrText.setVisibleLines(10);
+		descrRow.add(descrLabel);
+		descrRow.add(descrText);
+		postFormPanel.add(descrRow);
+				
+		// Price input
+		HorizontalPanel priceRow = new HorizontalPanel();
+		Label priceLabel = new Label("Price ($)");
+		final TextBox priceTextbox = new TextBox();
+		priceTextbox.setVisibleLength(6);
+		priceRow.add(priceLabel);
+		priceRow.add(priceTextbox);
+		postFormPanel.add(priceRow);
 	}
 	
 	
