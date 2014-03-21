@@ -52,7 +52,7 @@ public class AddressBookView {
 		SearchButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				doPostSearch();
+				doContactSearch();
 			}
 	      });
 		
@@ -66,7 +66,7 @@ public class AddressBookView {
 	}
 	
 	
-	protected void doPostSearch() {		
+	protected void doContactSearch() {		
 		VerticalPanel content = new VerticalPanel();
 		content.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 
