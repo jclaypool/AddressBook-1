@@ -17,6 +17,8 @@ public class AddressBook implements EntryPoint {
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
+	
+	
 	private final AddressBookView view = new AddressBookView();
 	/**
 	 * This is the entry point method.
@@ -26,5 +28,9 @@ public class AddressBook implements EntryPoint {
 		
 		view.viewWelcomePage();
 		
+	}
+	public void handleTitleSearchRequest(String text) {
+		// TODO Auto-generated method stub
+		System.out.println(text);
 	}
 }
