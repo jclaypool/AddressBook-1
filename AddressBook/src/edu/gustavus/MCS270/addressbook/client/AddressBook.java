@@ -30,7 +30,14 @@ public class AddressBook implements EntryPoint {
 		
 	}
 	public void handleTitleSearchRequest(String text) {
-		// TODO Auto-generated method stub
 		System.out.println(text);
+		
+		//waiting for the Tucker-tron to build ViewContactService (working on sorting)
+		
+	}
+	public void handleSortRequest(String nameOrZip) {
+		// TODO Auto-generated method stub
+		System.out.println(nameOrZip);
+		
 	}
 }

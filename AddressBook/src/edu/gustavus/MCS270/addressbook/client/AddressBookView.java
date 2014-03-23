@@ -18,6 +18,7 @@ import edu.gustavus.MCS270.addressbook.shared.Contact;
 public class AddressBookView {
 	
 	final PopupPanel searchPopup = new PopupPanel(false);
+	final PopupPanel sortPopup = new PopupPanel(false);
 	private AddressBook control;
 	
 	public AddressBookView(){}
@@ -60,6 +61,15 @@ public class AddressBookView {
 			}
 	      });
 		
+		Button sortButton = new Button();
+		sortButton.setText("sort");
+		SearchButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				doContactSearch();
+			}
+	      });
+		
 		
 		root.add(hPanel);
 		hPanel.add(vPanel);
@@ -69,6 +79,45 @@ public class AddressBookView {
 		
 	}
 	
+	
+	protected void doContactSort() {
+		VerticalPanel content = new VerticalPanel();
+		content.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		
+		HorizontalPanel btnRow = new HorizontalPanel();
+		btnRow.setStyleName("search-button-row");
+		Button cancelBtn = new Button("Cancel");
+		cancelBtn.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				searchPopup.hide();
+			}
+	      });
+		Button lastNameSortBtn = new Button("Search");
+		lastNameSortBtn.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				control.handleSortRequest("lastName");
+				searchPopup.hide();
+			}
+	      });
+		Button zipSortBtn = new Button("Search");
+		zipSortBtn.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				control.handleSortRequest("zip");
+				searchPopup.hide();
+			}
+	      });
+		btnRow.add(cancelBtn);
+		btnRow.add(new Label(""));
+		btnRow.add(lastNameSortBtn);
+		btnRow.add(new Label(""));
+		btnRow.add(zipSortBtn);
+		content.add(btnRow);
+		searchPopup.setWidget(content);
+		searchPopup.center();
+	}
 	
 	protected void doContactSearch() {		
 		VerticalPanel content = new VerticalPanel();
