@@ -115,38 +115,91 @@ public class AddressBookView {
 		
 		// First Name Input 
 		HorizontalPanel fNameRow = new HorizontalPanel();
-		Label nameLabel = new Label("First");
-		final TextBox nameTextbox = new TextBox();
-		fNameRow.add(nameLabel);
-		fNameRow.add(nameTextbox);
-		postFormPanel.add(nameRow);
+		Label fNameLabel = new Label("First Name");
+		final TextBox fNameTextbox = new TextBox();
+		fNameRow.add(fNameLabel);
+		fNameRow.add(fNameTextbox);
+		textFieldFormPanel.add(fNameRow);
 				
-		// Title input
-		HorizontalPanel titleRow = new HorizontalPanel();
-		Label titleLabel = new Label("Title (e.g. car, bike, etc)");
-		final TextBox titleTextbox = new TextBox();
-		titleRow.add(titleLabel);
-		titleRow.add(titleTextbox);
-		postFormPanel.add(titleRow);
+		// Last Name Input
+		HorizontalPanel lNameRow = new HorizontalPanel();
+		Label lNameLabel = new Label("Last Name");
+		final TextBox lNameTextbox = new TextBox();
+		lNameRow.add(lNameLabel);
+		lNameRow.add(lNameTextbox);
+		textFieldFormPanel.add(lNameRow);
 				
-		// Description input
-		HorizontalPanel descrRow = new HorizontalPanel();
-		Label descrLabel = new Label("Item Short description");
-		final TextArea descrText = new TextArea();
-		descrText.setCharacterWidth(40);
-		descrText.setVisibleLines(10);
-		descrRow.add(descrLabel);
-		descrRow.add(descrText);
-		postFormPanel.add(descrRow);
+		// Address input
+		HorizontalPanel addressRow = new HorizontalPanel();
+		Label addressLabel = new Label("Address");
+		final TextBox addressTextbox = new TextBox();
+		addressRow.add(addressLabel);
+		addressRow.add(addressTextbox);
+		textFieldFormPanel.add(addressRow);
 				
-		// Price input
-		HorizontalPanel priceRow = new HorizontalPanel();
-		Label priceLabel = new Label("Price ($)");
-		final TextBox priceTextbox = new TextBox();
-		priceTextbox.setVisibleLength(6);
-		priceRow.add(priceLabel);
-		priceRow.add(priceTextbox);
-		postFormPanel.add(priceRow);
+		// City Input
+		HorizontalPanel cityRow = new HorizontalPanel();
+		Label cityLabel = new Label("City");
+		final TextBox cityTextbox = new TextBox();
+		cityRow.add(cityLabel);
+		cityRow.add(cityTextbox);
+		textFieldFormPanel.add(cityRow);
+		
+		// State Input
+		HorizontalPanel stateRow = new HorizontalPanel();
+		Label stateLabel = new Label("State");
+		final TextBox stateTextbox = new TextBox();
+		stateRow.add(stateLabel);
+		stateRow.add(stateTextbox);
+		textFieldFormPanel.add(stateRow);
+				
+		// Zip Input
+		HorizontalPanel zipRow = new HorizontalPanel();
+		Label zipLabel = new Label("ZIP Code");
+		final TextBox zipTextbox = new TextBox();
+		zipTextbox.setVisibleLength(6);
+		zipRow.add(zipLabel);
+		zipRow.add(zipTextbox);
+		textFieldFormPanel.add(zipRow);
+				
+		// E-mail Input
+		HorizontalPanel emailRow = new HorizontalPanel();
+		Label emailLabel = new Label("E-mail");
+		final TextBox emailTextbox = new TextBox();
+		emailRow.add(emailLabel);
+		emailRow.add(emailTextbox);
+		textFieldFormPanel.add(emailRow);
+		
+		// Phone Number Input
+		HorizontalPanel phoneNumberRow = new HorizontalPanel();
+		Label phoneNumberLabel = new Label("Phone");
+		final TextBox phoneNumberTextbox = new TextBox();
+		phoneNumberRow.add(phoneNumberLabel);
+		phoneNumberRow.add(phoneNumberTextbox);
+		textFieldFormPanel.add(phoneNumberRow);
+		
+		if(contact!=null) {
+			fNameTextbox.setText(contact.getFirstName());
+			lNameTextbox.setText(contact.getLastName());
+			addressTextbox.setText(contact.getAddress());
+			cityTextbox.setText(contact.getCity());
+			stateTextbox.setText(contact.getState());
+			//zipTextbox.setText(contact.getZip());
+			emailTextbox.setText(contact.getEmail());
+			//phoneNumberTextbox.setText(contact.getPhoneNumber());
+		}
+		
+		//Add to Address Book Button
+		Button addContactButton;
+		if(contact != null){
+			addContactButton = new Button("Submit Contact Changes");
+			addContactButton.setText("Submit Contact Changes");
+		}	else {
+			addContactButton = new Button("Add Contact to Address Book");
+			addContactButton.setText("Add Contact to Address Book");
+		}
+		textFieldFormPanel.add(addContactButton);
+		
 	}
 	
 	

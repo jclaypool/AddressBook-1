@@ -74,6 +74,12 @@ public class Contact implements Serializable {
 			public void setAddress(String a) {
 				address = a; 
 			}
+			public String getCity() {
+				return city;
+			}
+			public void setCity(String c) {
+				city = c; 
+			}
 			public String getState() {
 				return state;
 			}
