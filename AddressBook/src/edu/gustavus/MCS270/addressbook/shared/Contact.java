@@ -11,7 +11,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 
 @PersistenceCapable(identityType=IdentityType.APPLICATION)
-public class Contact implements Serializable {
+public class Contact implements Serializable, Comparable<Contact> {
 		private static final long serialVersionUID = 1L;
 		@PrimaryKey
 		// Need to define the key this way so that a Seller can be passed
@@ -55,6 +55,11 @@ public class Contact implements Serializable {
 			phoneNumber = phone;
 			
 		}
+		@Override
+		public int compareTo(Contact other) {
+			// TODO Auto-generated method stub
+			return lastName.compareTo(other.lastName);
+		}
 			
 			public String getFirstName() {
 				return firstName;
@@ -73,6 +78,12 @@ public class Contact implements Serializable {
 			}
 			public void setAddress(String a) {
 				address = a; 
+			}
+			public String getCity() {
+				return city;
+			}
+			public void setCity(String c) {
+				city = c; 
 			}
 			public String getState() {
 				return state;
@@ -98,5 +109,7 @@ public class Contact implements Serializable {
 			public void setPhoneNumber(int phone) {
 				phoneNumber = phone;
 			}
+
+			
 			
 }
