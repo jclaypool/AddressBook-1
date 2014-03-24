@@ -43,6 +43,8 @@ public class AddressBookView {
 		Button viewContactsButton = new Button();
 		viewContactsButton.setText("View Contacts");
 		
+		
+		
 		//create an ADD CONTACTS button (David is a nerd)
 		Button addContactButton = new Button();
 		addContactButton.setText("Add Contact");
