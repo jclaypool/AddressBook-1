@@ -2,6 +2,8 @@ package edu.gustavus.MCS270.addressbook.client;
 
 import com.google.gwt.core.client.EntryPoint;
 
+import edu.gustavus.MCS270.addressbook.shared.Contact;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -38,6 +40,12 @@ public class AddressBook implements EntryPoint {
 	public void handleSortRequest(String nameOrZip) {
 		// TODO Auto-generated method stub
 		System.out.println(nameOrZip);
+		
+	}
+	public void handleAddContact(Contact contact) {
+		// TODO Auto-generated method stub
+		
+		
 		
 	}
 }

@@ -1,5 +1,7 @@
 package edu.gustavus.MCS270.addressbook.client;
 
+import javax.jdo.annotations.Persistent;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -36,7 +38,7 @@ public class AddressBookView {
 		createMenuButtons();
 	}
 
-	private void createMenuButtons() {
+	private VerticalPanel createMenuButtons() {
 		RootPanel root = RootPanel.get();
 		
 		
@@ -53,6 +55,16 @@ public class AddressBookView {
 		//create an ADD CONTACTS button (David is a nerd)
 		Button addContactButton = new Button();
 		addContactButton.setText("Add Contact");
+		addContactButton.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				viewAddContactPage();
+				
+			}
+			
+		});
+		
 		
 		Button SearchButton = new Button();
 		SearchButton.setText("Search");
@@ -77,7 +89,7 @@ public class AddressBookView {
 		hPanel.add(vPanel);
 		vPanel.add(viewContactsButton);
 		vPanel.add(addContactButton);
-		
+		return vPanel;
 		
 	}
 	
@@ -158,11 +170,20 @@ public class AddressBookView {
 		searchPopup.center();
 	}
 	
-	private FormPanel makeAddContactForm(final Contact contact) {
-		final FormPanel contactFormPanel = new FormPanel();
+	
+	private void viewAddContactPage(){
+		RootPanel root = RootPanel.get();
+		root.clear();
+		VerticalPanel vPanel = createMenuButtons();
+		vPanel.add(makeAddContactPanel(null));
+	}
+	
+	
+	private HorizontalPanel makeAddContactPanel(final Contact contact) {
+		final HorizontalPanel contactPanel = new HorizontalPanel();
 		VerticalPanel textFieldFormPanel = new VerticalPanel();
 		textFieldFormPanel.addStyleName("submitPostVertPanel");
-		contactFormPanel.add(textFieldFormPanel);
+		contactPanel.add(textFieldFormPanel);
 		
 		// First Name Input 
 		HorizontalPanel fNameRow = new HorizontalPanel();
@@ -242,14 +263,40 @@ public class AddressBookView {
 		
 		//Add to Address Book Button
 		Button addContactButton;
-		if(contact != null){
-			addContactButton = new Button("Submit Contact Changes");
-			addContactButton.setText("Submit Contact Changes");
-		}	else {
-			addContactButton = new Button("Add Contact to Address Book");
-			addContactButton.setText("Add Contact to Address Book");
-		}
+		addContactButton = new Button("Add Contact to Address Book");
+		addContactButton.setText("Add Contact to Address Book");
+		
+		addContactButton.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				
+				
+				Contact contact = new Contact();
+
+				contact.setFirstName(fNameTextbox.getText());
+				contact.setLastName(lNameTextbox.getText());
+				contact.setAddress(addressTextbox.getText());
+				contact.setCity(cityTextbox.getText());
+				contact.setState(stateTextbox.getText());
+				contact.setZip(Integer.parseInt(zipTextbox.getText()));
+				contact.setEmail(emailTextbox.getText());
+				contact.setPhoneNumber(Integer.parseInt(phoneNumberTextbox.getText()));
+				
+				
+				
+				control.handleAddContact(contact);
+				
+			}
+			
+		});
+		
+		
 		textFieldFormPanel.add(addContactButton);
+		
+		
+		return contactPanel;
 		
 	}
 	
