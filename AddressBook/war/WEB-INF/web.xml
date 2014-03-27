@@ -6,6 +6,15 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
+  <servlet>
+    <servlet-name>addressBookServiceImpl</servlet-name>
+    <servlet-class>edu.gustavus.MCS270.addressbook.server.AddressBookServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>addressBookServiceImpl</servlet-name>
+    <url-pattern>/addressbook/submitcontact</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>

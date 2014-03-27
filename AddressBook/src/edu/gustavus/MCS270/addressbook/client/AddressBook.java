@@ -1,6 +1,11 @@
 package edu.gustavus.MCS270.addressbook.client;
 
+import java.util.List;
+
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.core.java.util.Collections;
 
 import edu.gustavus.MCS270.addressbook.shared.Contact;
 
@@ -8,25 +13,15 @@ import edu.gustavus.MCS270.addressbook.shared.Contact;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class AddressBook implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	private static final String SERVER_ERROR = "An error occurred while "
-			+ "attempting to contact the server. Please check your network "
-			+ "connection and try again.";
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
 	
+	private final AddressBookServiceAsync addressBookService = GWT
+			.create(AddressBookService.class);
 	
 	private final AddressBookView view = new AddressBookView();
-	/**
-	 * This is the entry point method.
-	 */
+
 	public void onModuleLoad() {
-		view.setControl(AddressBook.this);
+		view.setControl(this);
 		
 		view.viewWelcomePage();
 		
@@ -34,7 +29,23 @@ public class AddressBook implements EntryPoint {
 	public void handleTitleSearchRequest(String text) {
 		System.out.println(text);
 		
-		//waiting for the Tucker-tron to build ViewContactService (working on sorting)
+		addressBookService.getSearchResultsFromServer(text, new AsyncCallback<List<Contact>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				System.out.println("Fail at search");
+				
+			}
+
+			@Override
+			public void onSuccess(List<Contact> result) {
+				view.viewContactPage(result);
+				
+			}
+
+
+			
+		});
 		
 	}
 	public void handleSortRequest(String nameOrZip) {
@@ -45,7 +56,78 @@ public class AddressBook implements EntryPoint {
 	public void handleAddContact(Contact contact) {
 		// TODO Auto-generated method stub
 		
+		addressBookService.submitContactToServer(contact, new AsyncCallback<String>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				System.out.println("FAIL!");
+				
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				System.out.println("success. awww yiss");
+				
+			}
+			
+		});
+		System.out.println(contact.toString());
 		
 		
+	}
+	public void getContactsFromServer() {
+		addressBookService.getContactsFromServer(new AsyncCallback<List<Contact>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				System.out.println("Didnt get contacts");
+				
+			}
+
+			@Override
+			public void onSuccess(List<Contact> result) {
+				System.out.print(result.toString());
+				view.viewContactPage(result);
+			}
+		});
+		
+	}
+	public void deleteContact(Contact contact) {
+		addressBookService.deleteContactFromServer(contact, new AsyncCallback<String>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				System.out.println("FAIL at delete");
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				// TODO Auto-generated method stub
+				System.out.println("Success");
+				getContactsFromServer();
+			}
+			
+		});
+		
+	}
+	
+	public void sort(String nameOrZip) {
+		addressBookService.getSortedResultsFromServer(nameOrZip, new AsyncCallback<List<Contact>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				System.out.println("FAilrue!");
+			}
+
+			@Override
+			public void onSuccess(List<Contact> result) {
+				// TODO Auto-generated method stub
+				view.viewContactPage(result);
+				
+			}
+			
+		});
 	}
 }
