@@ -130,6 +130,8 @@ public class AddressBookView {
 			
 		});
 		hPanel.add(delete);
+		hPanel.setWidth("400px");
+		hPanel.setSpacing(20);
 		return hPanel;
 	}
 	public void moreInfoMessage(Contact contact) {
@@ -193,6 +195,8 @@ public class AddressBookView {
 		vPanel.add(searchButton);
 		vPanel.add(viewContactsButton);
 		vPanel.add(addContactButton);
+		
+		vPanel.setSpacing(5);
 		HorizontalPanel hPanel = new HorizontalPanel();
 		hPanel.add(vPanel);
 		return hPanel;
