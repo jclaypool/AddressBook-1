@@ -1,0 +1,2 @@
+serviceClass: edu.gustavus.MCS270.addressbook.client.AddressBookService
+path: 78723EEB309092C05E633B6F6AF25573.gwt.rpc
